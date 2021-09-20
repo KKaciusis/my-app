@@ -37,7 +37,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="circle" style={{backgroundColor: this.state.bg, width: this.state.size+'px', height: this.state.size+'px'}}>
+            <div className="circle" style={{backgroundColor: this.state.bg, width: this.state.size+'px', height: this.state.size+'px', borderRadius: this.state.shapeSquere ? '0' : '50%'}}>
                 <div>
                 <input type="text" className="inputs" value={this.state.bgIn} onChange={this.inChangeColor}/>
                 <input type="text" value={this.state.sizeIn} onChange={this.inChangeSize}/>
