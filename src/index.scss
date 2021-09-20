@@ -1,11 +1,11 @@
 :root {
-  --background-color: #ffe5e5;
+  --background-color: #2bff00;
   --color: #000000;
-  --feedback-bg-color: #ffffff;
+  --feedback-bg-color: #2bff00;
   --feedback-secondary-color: #ffacac;
-  --feedback-primary-color: #53488d;
-  --feedback-icon-color: #ffffff;
-  --feedback-form-input: #f4f4f4;
+  --feedback-primary-color: lightGrey;
+  --feedback-icon-color: #2bff00;
+  --feedback-form-input: #2bff00;
 }
 
 body {
@@ -177,4 +177,7 @@ button {
           width: 100px;
       }
   }
+}
+.inputs{
+  border: 2px solid black;
 }
