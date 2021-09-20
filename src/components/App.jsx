@@ -30,7 +30,7 @@ class App extends React.Component {
     doColor = () => {
         this.setState(state => ({bg: state.bgIn}));
     }
-    inChangeShape = (e) => {
+    inChangeShape = () => {
         this.setState(state => ({shapeSquere: (!state.shapeSquere)}))
     }
 
