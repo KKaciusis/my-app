@@ -1,36 +1,37 @@
 import React from 'react';
-import SmallCircle from './SmallCircle';
+import SmallShape from './SmallShape';
 
 class App extends React.Component {
     constructor(){
         super();
         this.state ={
-            circles: [],
+            shapes: [],
             circleIn: ''
 
         };
     }
-    addCircle = (e) =>{
-        const circle = {color: this.state.circleIn};
-        const circles = this.state.circles.slice();
-        circles.push(circle);
+    addShape = (s) =>{
+        const shape = {color: this.state.circleIn, shape: s};
+        const shapes = this.state.shapes.slice();
+        shapes.push(shape);
         this.setState({
-            circles:  circles
+            shapes: shapes
         })
-        localStorage.setItem('allcircles', JSON.stringify(circles))
+        localStorage.setItem('allShapes', JSON.stringify(shapes))
     }
+
     circleInputHandler = (e) => {
         this.setState({
             circleIn: e.target.value,
         });
     }
     componentDidMount(){
-        const circle = JSON.parse(localStorage.getItem('allcircles'));
-        if (null === circle){
+        const shape = JSON.parse(localStorage.getItem('allShapes'));
+        if (null === shape){
             return;
         }
         this.setState({
-            circles: circle
+            shapes: shape
         })
 
     }
@@ -38,11 +39,11 @@ class App extends React.Component {
     render() {
         return (
             <>
-            {this.state.circles.map((b, i)=> <SmallCircle key={i} color={b.color}/>)}
+            {this.state.shapes.map((b, i)=> <SmallShape key={i} color={b.color} shape={b.shape}/>)}
             <div>
                     <input type="text" value={this.state.circleIn} onChange={this.circleInputHandler}/>
-                    <button className="input-button" onClick={()=>this.addCircle('circle')}>Add Circle</button>
-                    <button className="input-button" onClick={()=>this.addCircle('sheep')}>Add Sq</button>
+                    <button className="input-button" onClick={()=>this.addShape('circle')}>Add Circle</button>
+                    <button className="input-button" onClick={()=>this.addShape('sq')}>Add Sq</button>
             </div>
             </>
 
