@@ -1,52 +1,51 @@
 import React from 'react';
-
+import SmallCircle from './SmallCircle';
 
 class App extends React.Component {
     constructor(){
         super();
         this.state ={
-            bg: 'white',
-            bgIn: 'color input',
-            size: 100,
-            sizeIn: 'size input',
-            shapeSquere: false,
+            circles: [],
+            circleIn: ''
+
         };
     }
-    inChangeSize = (e) => {
+    addCircle = (e) =>{
+        const circle = {color: this.state.circleIn};
+        const circles = this.state.circles.slice();
+        circles.push(circle);
         this.setState({
-            sizeIn: e.target.value,
+            circles:  circles
+        })
+        localStorage.setItem('allcircles', JSON.stringify(circles))
+    }
+    circleInputHandler = (e) => {
+        this.setState({
+            circleIn: e.target.value,
         });
     }
-
-    inChangeColor = (e) => {
+    componentDidMount(){
+        const circle = JSON.parse(localStorage.getItem('allcircles'));
+        if (null === circle){
+            return;
+        }
         this.setState({
-            bgIn: e.target.value,
-        });
-    }
-    doSize = () => {
-        this.setState(state => ({size: state.sizeIn}));
-    }
+            circles: circle
+        })
 
-    doColor = () => {
-        this.setState(state => ({bg: state.bgIn}));
     }
-    inChangeShape = () => {
-        this.setState(state => ({shapeSquere: (!state.shapeSquere)}))
-    }
-
 
     render() {
         return (
-            <div className="circle" style={{backgroundColor: this.state.bg, width: this.state.size+'px', height: this.state.size+'px', borderRadius: this.state.shapeSquere ? '0' : '50%'}}>
-                <div>
-                <input type="text" className="inputs" value={this.state.bgIn} onChange={this.inChangeColor}/>
-                <input type="text" value={this.state.sizeIn} onChange={this.inChangeSize}/>
-                <button className="input-button" onClick={this.doSize}>Change Size</button>
-                <button className="input-button" onClick={this.doColor}>Change Color</button>
-                <input id="check" type="checkbox" checked={this.state.shapeSquere} onChange={this.inChangeShape}/>
-                <label for="check">Change shape</label>
+            <>
+            {this.state.circles.map((b, i)=> <SmallCircle key={i} color={b.color}/>)}
+            <div>
+                    <input type="text" value={this.state.circleIn} onChange={this.circleInputHandler}/>
+                    <button className="input-button" onClick={()=>this.addCircle('circle')}>Add Circle</button>
+                    <button className="input-button" onClick={()=>this.addCircle('sheep')}>Add Sq</button>
             </div>
-            </div>
+            </>
+
         );
     }
 }
