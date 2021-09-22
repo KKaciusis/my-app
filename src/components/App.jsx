@@ -15,7 +15,7 @@ function App() {
         const shapess = shapes.slice();
         shapess.push(shape);
         setShape(shapess)
-        localStorage.setItem('allShapes', JSON.stringify(shapes));
+        localStorage.setItem('allShapes', JSON.stringify(shapess));
     }
   const  deleteShape = (id) => {
         console.log(id)
@@ -27,7 +27,7 @@ function App() {
             }
         }
         setShape(shapess)
-        localStorage.setItem('allShapes', JSON.stringify(shapes));
+        localStorage.setItem('allShapes', JSON.stringify(shapess));
     }
    const editShape = (id, color) => {
         console.log(id)
