@@ -1,18 +1,21 @@
-import React, { setState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SmallShape from './SmallShape';
 import getId from '../shared/id';
 
 function App() {
     
-    const [shapes, setShape] = setState([]);
-    const [colorIn, setColorIn] = setState('');
+    const [shapes, setShape] = useState([]);
+    const [colorIn, setColorIn] = useState('');
+    useEffect(()=>{
+
+    });
 
   const  addShape = (s) =>{
         const shape = {id: getId(), color: colorIn, shape: s};
         const shapess = shapes.slice();
         shapess.push(shape);
         setShape(shapess)
-        //localStorage.setItem('allShapes', JSON.stringify(shapes));
+        localStorage.setItem('allShapes', JSON.stringify(shapes));
     }
   const  deleteShape = (id) => {
         console.log(id)
@@ -24,7 +27,7 @@ function App() {
             }
         }
         setShape(shapess)
-        //localStorage.setItem('allShapes', JSON.stringify(shapes));
+        localStorage.setItem('allShapes', JSON.stringify(shapes));
     }
    const editShape = (id, color) => {
         console.log(id)
@@ -36,22 +39,20 @@ function App() {
             }
         }
         setShape(shapess)
-        //localStorage.setItem('allShapes', JSON.stringify(shapes));
+        localStorage.setItem('allShapes', JSON.stringify(shapess));
     }
 
    const colorInputHandler = (e) => {
         setColorIn(e.target.value);
     }
-//    componentDidMount(){
-//        const shape = JSON.parse(localStorage.getItem('allShapes'));
-//        if (null === shape){
-//            return;
-//        }
-//        this.setState({
-//            shapes: shape
-//        })
-//
-//    }
+
+    useEffect(() => {
+        const shapess = JSON.parse(localStorage.getItem('allShapes'));
+        if (null === shapess){
+            return;
+        }
+        setShape(shapess)
+    }, [])
 
         return (
             <>
