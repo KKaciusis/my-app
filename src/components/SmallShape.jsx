@@ -5,8 +5,12 @@ class SmallShape extends React.Component {
         super(props);
         this.state ={
             editIn: ''
-
         };
+    }
+    editInputHandler = (e) => {
+        this.setState({
+            editIn: e.target.value,
+        });
     }
 render(){
     return (<div
@@ -18,8 +22,8 @@ render(){
             <span>{this.props.color}</span>
             <button className="input-button-small" onClick={()=>this.props.delete(this.props.id)}>Delete</button>
             <div className="center">
-            <input type="text"></input>
-            <button className="input-button-small" onClick={()=>this.props.delete(this.props.id)}>edit color</button>
+            <input type="text" value={this.state.editIn} onChange={this.editInputHandler}></input>
+            <button className="input-button-small" onClick={()=>this.props.edit(this.props.id, this.state.editIn)}>edit color</button>
             </div>
             </div>);
 }};

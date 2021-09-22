@@ -18,7 +18,7 @@ class App extends React.Component {
         this.setState({
             shapes: shapes
         })
-        localStorage.setItem('allShapes', JSON.stringify(shapes))
+        localStorage.setItem('allShapes', JSON.stringify(shapes));
     }
     deleteShape = (id) => {
         console.log(id)
@@ -32,7 +32,21 @@ class App extends React.Component {
         this.setState({
             shapes: shapes
         })
-        localStorage.setItem('allShapes', JSON.stringify(shapes))
+        localStorage.setItem('allShapes', JSON.stringify(shapes));
+    }
+    editShape = (id, color) => {
+        console.log(id)
+        const shapes = this.state.shapes.slice();
+        for(let i = 0; i < shapes.length; i++){
+            if(shapes[i].id === id){
+                shapes[i].color = color;
+                break;
+            }
+        }
+        this.setState({
+            shapes: shapes
+        })
+        localStorage.setItem('allShapes', JSON.stringify(shapes));
     }
 
     circleInputHandler = (e) => {
@@ -54,7 +68,7 @@ class App extends React.Component {
     render() {
         return (
             <>
-            {this.state.shapes.map(b => <SmallShape key={b.id} delete={this.deleteShape} id={b.id} color={b.color} shape={b.shape}/>)}
+            {this.state.shapes.map(b => <SmallShape key={b.id} delete={this.deleteShape} edit={this.editShape} id={b.id} color={b.color} shape={b.shape}/>)}
             <div>
                     <input type="text" value={this.state.circleIn} onChange={this.circleInputHandler}/>
                     <button className="input-button" onClick={()=>this.addShape('circle')}>Add Circle</button>
